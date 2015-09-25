@@ -190,7 +190,8 @@ int ENC28J60_LWIP_Driver::Open( ENC28J60_LWIP_DRIVER_CONFIG* config, int index )
 
     iface = &g_NetworkConfig.NetworkInterfaces[index];
 
-    if(0 == (iface->flags & SOCK_NETWORKCONFIGURATION_FLAGS_DHCP))
+	bool isDHCP = (iface->flags & SOCK_NETWORKCONFIGURATION_FLAGS_DHCP) != 0;
+    if(!isDHCP)
     {
         ipaddr.addr  = iface->ipaddr;
         gw.addr      = iface->gateway;
@@ -219,6 +220,10 @@ int ENC28J60_LWIP_Driver::Open( ENC28J60_LWIP_DRIVER_CONFIG* config, int index )
     netif_set_default( pNetIF );
 
     LwipNetworkStatus = enc28j60_get_link_status(&config->SPI_Config);
+	if (LwipNetworkStatus & !isDHCP)
+	{
+		netif_set_up(pNetIF);
+	}
 
     /* Initialize the continuation routine for the driver interrupt and receive */    
     InitContinuations( pNetIF );
