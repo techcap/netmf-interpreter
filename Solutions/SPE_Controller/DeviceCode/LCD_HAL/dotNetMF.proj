@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <AssemblyName>LCD_HAL_SPE_Controller</AssemblyName>
+    <ProjectGuid>{F5D2DDCD-2715-4C88-BFF1-121B6CF91B91}</ProjectGuid>
+    <Size>
+    </Size>
+    <Description>SPE_Controller display driver</Description>
+    <Level>HAL</Level>
+    <LibraryFile>LCD_HAL_SPE_Controller.$(LIB_EXT)</LibraryFile>
+    <ProjectPath>$(SPOCLIENT)\Solutions\SPE_Controller\DeviceCode\LCD_HAL\dotNetMF.proj</ProjectPath>
+    <ManifestFile>LCD_HAL_SPE_Controller.$(LIB_EXT).manifest</ManifestFile>
+    <Groups>Display</Groups>
+    <LibraryCategory>
+      <MFComponent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="LCD_HAL" Guid="{9F6063F2-7ED0-49F7-95A3-2A2D2219EEAB}" ProjectPath="" Conditional="" xmlns="">
+        <VersionDependency xmlns="http://schemas.microsoft.com/netmf/InventoryFormat.xsd">
+          <Major>4</Major>
+          <Minor>0</Minor>
+          <Revision>0</Revision>
+          <Build>0</Build>
+          <Extra />
+          <Date>2009-04-30</Date>
+        </VersionDependency>
+        <ComponentType xmlns="http://schemas.microsoft.com/netmf/InventoryFormat.xsd">LibraryCategory</ComponentType>
+      </MFComponent>
+    </LibraryCategory>
+    <Documentation>
+    </Documentation>
+    <PlatformIndependent>False</PlatformIndependent>
+    <CustomFilter>
+    </CustomFilter>
+    <Required>False</Required>
+    <IgnoreDefaultLibPath>False</IgnoreDefaultLibPath>
+    <IsStub>false</IsStub>
+    <Directory>Solutions\SPE_Controller\DeviceCode\LCD_HAL</Directory>
+    <OutputType>Library</OutputType>
+    <PlatformIndependentBuild>false</PlatformIndependentBuild>
+    <Version>4.0.0.0</Version>
+  </PropertyGroup>
+  <Import Project="$(SPOCLIENT)\tools\targets\Microsoft.SPOT.System.Settings" />
+    <PropertyGroup />
+  <ItemGroup>
+    <IncludePaths Include="DeviceCode\Targets\Native\STM32F4\DeviceCode\STM32F4x9_HAL_Lib" />
+    <Compile Include="Display_SPE_Controller_config.cpp" />
+    <Compile Include="Display_SPE_Controller_functions.cpp" />
+  </ItemGroup>
+  <Import Project="$(SPOCLIENT)\tools\targets\Microsoft.SPOT.System.Targets" />
+</Project>
