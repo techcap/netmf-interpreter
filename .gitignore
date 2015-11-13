@@ -43,4 +43,4 @@ Listings/
 *.axfdump
 /crypto/lib
 /Work/Output
-!Solutions/SPE_Controller/DeviceCode/Spe/Spe.Hardware/bin/Debug
+!/Solutions/SPE_Controller/DeviceCode/Spe/Spe.Hardware/bin/Debug
