@@ -55,7 +55,7 @@ void NativeADC::NativeADCRead(CLR_RT_HeapBlock* pMngObj, INT32 pin, INT32 count,
 	if ((UINT32)pin >= STM32F4_AD_NUM)
 		hr = CLR_E_INDEX_OUT_OF_RANGE;
 
-	ADCx->DR;
+	//ADCx->DR;
 	ADCx->SQR3 = g_STM32F4_AD_Channel[pin];
 
 	//UINT16 *averageBuffer = NULL;
@@ -127,13 +127,13 @@ INT32 NativeADC::NativeADCReadSquareSum(CLR_RT_HeapBlock* pMngObj, INT32 pin, IN
 	if (!IsAvailableConfiguration(samplingInterval, averageCount))
 	{
 		hr = CLR_E_NOT_SUPPORTED;
-		return;
+		return 0;
 	}
 
 	if ((UINT32)pin >= STM32F4_AD_NUM)
 		hr = CLR_E_INDEX_OUT_OF_RANGE;
 
-	ADCx->DR;
+	//ADCx->DR;
 	ADCx->SQR3 = g_STM32F4_AD_Channel[pin];
 
 	//UINT16 *averageBuffer = NULL;
@@ -141,7 +141,7 @@ INT32 NativeADC::NativeADCReadSquareSum(CLR_RT_HeapBlock* pMngObj, INT32 pin, IN
 	if (averageCount > 100)
 	{
 		hr = CLR_E_NOT_SUPPORTED;
-		return;
+		return 0;
 	}
 	UINT16 averageBuffer[100];
 

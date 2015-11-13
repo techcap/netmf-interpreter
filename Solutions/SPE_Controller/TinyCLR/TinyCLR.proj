@@ -24,7 +24,7 @@
     <ExtraTargets>BuildSigFiles</ExtraTargets>
     <ExtraEXETargets>MetaDataProcessorDat;TinyClrDat</ExtraEXETargets>
     <ImageLocation Condition="'$(MEMORY)'=='FLASH'">\ER_FLASH</ImageLocation>
-    <LINK_FLAGS Condition="'$(COMPILER_TOOL)'!='GCC'">$(LINK_FLAGS) --verbose $(SWTC)keep *(.init_array)</LINK_FLAGS>
+    <LINK_FLAGS Condition="'$(COMPILER_TOOL)'!='GCC'">$(LINK_FLAGS) $(SWTC)keep *(.init_array)</LINK_FLAGS>
     <MMP_DAT_SKIP>false</MMP_DAT_SKIP>
     <MMP_DAT_CreateDatabaseFile>$(BIN_DIR)\$(AssemblyName).dat</MMP_DAT_CreateDatabaseFile>
     <EXEScatterFileDefinition>$(SRC_DIR)\scatterfile_$(AssemblyName)_$(COMPILER_TOOL).$(SCATTER_EXT)</EXEScatterFileDefinition>
@@ -46,6 +46,7 @@
     <IncludePaths Include="DeviceCode\Targets\OS\CMSIS_RTOS\DeviceCode\lwip_1_4_1_os" />
     <Compile Include="allocator.cpp" />
     <Compile Include="tinyclr.cpp" />
+    <Compile Include="WatchDog.cpp" />
     <HFiles Include="$(SPOCLIENT)\clr\include\tinyclr_application.h" />
     <ObjFiles Include="$(OBJ_DIR)\$(AssemblyName)_dat.$(OBJ_EXT)" />
     <ScatterFileReferences Include="$(SRC_DIR)\scatterfile_$(AssemblyName)_$(COMPILER_TOOL).$(SCATTER_EXT)" />
@@ -54,7 +55,6 @@
   <Import Condition="'$(HARDWARE_FEATUREPROJ)'==''" Project="$(SPOCLIENT)\Framework\Features\Hardware.featureproj" />
   <Import Condition="'$(NATIVEEVENTDISPATCHER_FEATUREPROJ)'==''" Project="$(SPOCLIENT)\Framework\Features\NativeEventDispatcher.featureproj" />
   <Import Condition="'$(DATASTORAGE_FEATUREPROJ)'==''" Project="$(SPOCLIENT)\Framework\Features\DataStorage.featureproj" />
-  <Import Condition="'$(BLOCKSTORAGE_FEATUREPROJ)'==''" Project="$(SPOCLIENT)\Framework\Features\BlockStorage.featureproj" />
   <Import Condition="'$(DEBUGGER_FEATUREPROJ)'==''" Project="$(SPOCLIENT)\Framework\Features\Debugger.featureproj" />
   <Import Condition="'$(SOCKETS_PORT_FEATUREPROJ)'==''" Project="$(SPOCLIENT)\Framework\Features\SOCKETS_Port.featureproj" />
   <Import Condition="'$(USB_PORT_FEATUREPROJ)'==''" Project="$(SPOCLIENT)\Framework\Features\USB_Port.featureproj" />
@@ -76,6 +76,7 @@
   <Import Project="$(SPOCLIENT)\Framework\Features\FileSystem.featureproj" />
   <Import Project="$(SPOCLIENT)\Framework\Features\PWM.featureproj" />
   <Import Project="$(SPOCLIENT)\Framework\Features\SD.featureproj" />
+  <!--<Import Condition="'$(BLOCKSTORAGE_FEATUREPROJ)'==''" Project="$(SPOCLIENT)\Framework\Features\BlockStorage.featureproj" /> SD.featureproj에 포함됨-->
   <!--<Import Project="$(SPOCLIENT)\Framework\Features\OneWire.featureproj" />-->
   <!--<Import Project="$(SPOCLIENT)\Framework\Features\TimeService.featureproj" />-->
   <Import Project="$(SPOCLIENT)\Framework\Features\TouchScreen.featureproj" Condition="'$(TOUCHSCREEN_FEATUREPROJ)'==''" />
@@ -178,14 +179,10 @@
     <RequiredProjects Include="$(SPOCLIENT)\DeviceCode\Targets\Native\STM32F4\DeviceCode\STM32F4_time\dotNetMF.proj" />
   </ItemGroup>
   <ItemGroup>
-    <DriverLibs Include="cpu_watchdog_stubs.$(LIB_EXT)" />
-    <RequiredProjects Include="$(SPOCLIENT)\DeviceCode\Drivers\stubs\Processor\stubs_watchdog\dotNetMF.proj" />
+    <DriverLibs Include="Watchdog_pal.$(LIB_EXT)" />
+    <RequiredProjects Include="$(SPOCLIENT)\DeviceCode\Pal\Watchdog\dotNetMF.proj" />
   </ItemGroup>
-
-  <ItemGroup>
-    <DriverLibs Include="Watchdog_pal_stubs.$(LIB_EXT)" />
-    <RequiredProjects Include="$(SPOCLIENT)\DeviceCode\Pal\Watchdog\stubs\dotNetMF.proj" />
-  </ItemGroup>
+  
   <ItemGroup>
     <DriverLibs Include="asyncproccall_pal.$(LIB_EXT)" />
     <RequiredProjects Include="$(SPOCLIENT)\DeviceCode\PAL\AsyncProcCall\dotNetMF.proj" />
@@ -529,32 +526,37 @@
     <PlatformIndependentLibs Include="Graphics_Gif.$(LIB_EXT)" />
     <RequiredProjects Include="$(SPOCLIENT)\CLR\Graphics\GIF\dotNetMF.proj" />
 
-    <DriverLibs Include="TouchPanel_pal.$(LIB_EXT)" />
-    <RequiredProjects Include="$(SPOCLIENT)\DeviceCode\Pal\TouchPanel\dotNetMF.proj" />
-
-    <DriverLibs Include="TouchPanel_HAL_SPE_Controller.$(LIB_EXT)" />
-    <RequiredProjects Include="$(SPOCLIENT)\Solutions\SPE_Controller\DeviceCode\TouchPanel_HAL\dotNetMF.proj" />
-    
-    <DriverLibs Include="TouchScreen_Config_HAL_SPE_Controller.$(LIB_EXT)" />
-    <RequiredProjects Include="$(SPOCLIENT)\Solutions\SPE_Controller\DeviceCode\TouchScreen_Config_HAL\dotNetMF.proj" />
-  </ItemGroup>
-  <ItemGroup Condition="'$(NO_USE_LCD)'!='true'">
     <DriverLibs Include="Ink_pal.$(LIB_EXT)" />
     <RequiredProjects Include="$(SPOCLIENT)\DeviceCode\Pal\Ink\dotNetMF.proj" />
 
+    <DriverLibs Include="Gesture_pal.$(LIB_EXT)" />
+    <RequiredProjects Include="$(SPOCLIENT)\DeviceCode\Pal\Gesture\dotNetMF.proj" />
+
+  </ItemGroup>
+
+  <!-- LCD 사용할 때 -->
+  <ItemGroup Condition="'$(NO_LCD)'!='true'">
     <DriverLibs Include="LCDController_HAL_SPE_Controller.$(LIB_EXT)" />
     <RequiredProjects Include="$(SPOCLIENT)\Solutions\SPE_Controller\DeviceCode\LCDController_HAL\dotNetMF.proj" />
 
     <DriverLibs Include="LCD_HAL_SPE_Controller.$(LIB_EXT)" />
     <RequiredProjects Include="$(SPOCLIENT)\Solutions\SPE_Controller\DeviceCode\LCD_HAL\dotNetMF.proj" />
 
-    <DriverLibs Include="Gesture_pal.$(LIB_EXT)" />
-    <RequiredProjects Include="$(SPOCLIENT)\DeviceCode\Pal\Gesture\dotNetMF.proj" />
-
     <DriverLibs Include="graphics_pal.$(LIB_EXT)" />
     <RequiredProjects Include="$(SPOCLIENT)\DeviceCode\PAL\Graphics\dotNetMF.proj" />
+
+    <DriverLibs Include="TouchPanel_pal.$(LIB_EXT)" />
+    <RequiredProjects Include="$(SPOCLIENT)\DeviceCode\Pal\TouchPanel\dotNetMF.proj" />
+
+    <DriverLibs Include="TouchPanel_HAL_SPE_Controller.$(LIB_EXT)" />
+    <RequiredProjects Include="$(SPOCLIENT)\Solutions\SPE_Controller\DeviceCode\TouchPanel_HAL\dotNetMF.proj" />
+
+    <DriverLibs Include="TouchScreen_Config_HAL_SPE_Controller.$(LIB_EXT)" />
+    <RequiredProjects Include="$(SPOCLIENT)\Solutions\SPE_Controller\DeviceCode\TouchScreen_Config_HAL\dotNetMF.proj" />
+
   </ItemGroup>
-  <ItemGroup Condition="'$(NO_USE_LCD)'=='true'">
+   <!--LCD 사용 안할 때-->
+  <ItemGroup Condition="'$(NO_LCD)'=='true'">
     <DriverLibs Include="Ink_pal_stubs.$(LIB_EXT)" />
     <RequiredProjects Include="$(SPOCLIENT)\DeviceCode\Pal\Ink\stubs\dotNetMF.proj" />
 
@@ -567,11 +569,11 @@
     <DriverLibs Include="graphics_pal_stubs.$(LIB_EXT)" />
     <RequiredProjects Include="$(SPOCLIENT)\DeviceCode\PAL\Graphics\stubs\dotNetMF.proj" />
     
-    <!--<DriverLibs Include="touchpanel_hal_stubs.$(LIB_EXT)" />
+    <DriverLibs Include="touchpanel_hal_stubs.$(LIB_EXT)" />
     <RequiredProjects Include="$(SPOCLIENT)\DeviceCode\Drivers\TouchPanel\stubs\dotNetMF.proj" />
 
     <DriverLibs Include="TouchPanel_Config_stubs.$(LIB_EXT)" />
-    <RequiredProjects Include="$(SPOCLIENT)\DeviceCode\Drivers\Stubs\TouchPanel\Config\dotNetMF.proj" />-->
+    <RequiredProjects Include="$(SPOCLIENT)\DeviceCode\Drivers\Stubs\TouchPanel\Config\dotNetMF.proj" />
   </ItemGroup>
 
 

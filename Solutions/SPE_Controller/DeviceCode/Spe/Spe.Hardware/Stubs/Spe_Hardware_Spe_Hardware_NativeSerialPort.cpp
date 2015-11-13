@@ -53,7 +53,7 @@ void NativeSerialPort::NativeSerialComm_Open(CLR_RT_HeapBlock* pMngObj, UINT8 po
 {
 	GPIO_InitTypeDef GPIO_InitStructure;
 	USART_InitTypeDef USART_InitStructure;
-	NVIC_InitTypeDef NVIC_InitStructure;
+	//NVIC_InitTypeDef NVIC_InitStructure;
 
 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;

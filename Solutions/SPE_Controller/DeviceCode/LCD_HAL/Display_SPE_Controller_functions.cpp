@@ -13,6 +13,8 @@ UINT8 _UINT8_CurrentRow,_UINT8_CurrentColumn,_UINT8_MaxRows,_UINT8_MaxColumns;
 
 BOOL LCD_Initialize()
 {
+	NATIVE_PROFILE_HAL_DRIVERS_DISPLAY();
+
 	g_LcdController_Config.BitsPerPixel = 16;
 
 	g_LcdController_Config.Width = 320;

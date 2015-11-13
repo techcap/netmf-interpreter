@@ -40,6 +40,8 @@
   <Import Project="$(SPOCLIENT)\tools\targets\Microsoft.SPOT.System.Settings" />
   <PropertyGroup />
   <ItemGroup>
+    <TinyCLR_Defines Include="STM32F429X" />
+    <TinyCLR_Defines Include="STM32F429_439xx" />
     <Compile Include="stm32f4xx_spi.c" />
     <Compile Include="stm32f4xx_ltdc.c" />
     <Compile Include="stm32f4xx_dma2d.c" />

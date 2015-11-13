@@ -85,12 +85,12 @@
             (See Section 4.4.4 of the ARM Cortex-M4 Generic User Guide [ ARM DUI 0553A (ID121610) ] )
             Since this starts the SRAM block, it's aligned just fine for any size table.
         -->
-    <ExecRegion Name="ER_RAM_RW" Base="%IRAM_BaseAddress%" Options="ABSOLUTE" Size="">
+    <ExecRegion Name="ER_RAM_RW" Base="%IRAM_BaseAddress%" Options="ABSOLUTE NOCOMPRESS" Size="">
       <FileMapping Name="*" Options="(VectorTable)"/>
       <FileMapping Name="*" Options="(+RW-DATA, +ZI)" />
     </ExecRegion>
 
-    <ExecRegion Name="ER_RAM_RO" Base="+0" Options="ABSOLUTE" Size="">
+    <ExecRegion Name="ER_RAM_RO" Base="+0" Options="ABSOLUTE NOCOMPRESS" Size="">
       <!-- Flash programming from Flash is safe on STM32 -->
       <!-- No need to place Flash programming code in RAM -->
       <!-- <FileMapping Name="*" Options="(SectionForFlashOperations)" /> -->

@@ -14,7 +14,7 @@ IF "%1" == "" (
 
 echo Build Mode :  %BuildMode%
 
-msbuild ..\Solutions\%ProjectName%\dotnetmf.proj /p:flavor=debug /filelogger /t:%BuildMode%
+msbuild ..\Solutions\%ProjectName%\dotnetmf.proj /p:flavor=debug /filelogger /t:%BuildMode% /flp:verbosity=detailed /clp:verbosity=minimal
 
 rem msbuild ..\Solutions\%ProjectName%\TinyBooter\TinyBooter.proj /p:flavor=debug /filelogger /t:%BuildMode%
 rem msbuild ..\Solutions\%ProjectName%\TinyClr\TinyClr.proj /p:flavor=debug /filelogger /t:%BuildMode%
@@ -34,7 +34,8 @@ copy ..\BuildOutput\THUMB2FP\MDK5.05\le\FLASH\debug\%ProjectName%\bin\Tinybooter
 copy ..\BuildOutput\THUMB2FP\MDK5.05\le\FLASH\debug\%ProjectName%\bin\tinyclr.bin\ER_CONFIG Output\bin\ER_CONFIG.bin
 copy ..\BuildOutput\THUMB2FP\MDK5.05\le\FLASH\debug\%ProjectName%\bin\tinyclr.bin\ER_FLASH Output\bin\ER_FLASH.bin
 
-SET /p "Press any key to program hex files..."
+echo --- Ready to program hex files ---
+pause
 rem program.bat
 
 

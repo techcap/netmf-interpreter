@@ -46,6 +46,11 @@ extern void STM32F4_GPIO_Pin_Config(GPIO_PIN pin, UINT32 mode, GPIO_RESISTOR res
 
 void __section("SectionForBootstrapOperations") BootstrapCode_GPIO()
 {
+	//SWD
+	CPU_GPIO_ReservePin(13, TRUE);
+	CPU_GPIO_ReservePin(14, TRUE);
+	CPU_GPIO_ReservePin(16 + 3, TRUE);
+
 	// Enable GPIO clocks for ports A - I
 	RCC->AHB1ENR |=
 		RCC_AHB1ENR_GPIOAEN | RCC_AHB1ENR_GPIOBEN | RCC_AHB1ENR_GPIOCEN |
@@ -58,5 +63,7 @@ void __section("SectionForBootstrapOperations") BootstrapCode_GPIO()
 	//CPU_GPIO_EnableOutputPin(LED5, FALSE);
 	//CPU_GPIO_EnableOutputPin(LED6, FALSE);
 
+#ifdef STM32F4_SDRAM
 	SDRAM_Init();
+#endif
 }

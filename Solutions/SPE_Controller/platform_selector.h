@@ -25,7 +25,7 @@
 //#define PLATFORM_ARM_STM32F4_ANY /* this is our new designation for STM32F4 */
 //#define PLATFORM_ARM_STM32F405RG /* this is our particular MCU */
 
-//#define STM32F429X 1 //STM32F4x9_HAL_Lib용임. 여기 쓰니 적용이 안돼서 SPE_Controller.settings로 옮김.
+#define STM32F429X
 #define STM32F429_439xx
 
 #define STM32F4_SDRAM

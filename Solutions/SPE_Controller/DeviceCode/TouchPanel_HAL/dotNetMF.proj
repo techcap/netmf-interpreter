@@ -42,7 +42,7 @@
   <ItemGroup>
     <Compile Include="touchpanel_SPE_Controller_config.cpp" />
     <Compile Include="touchpanel_SPE_Controller_functions.cpp" />
-    <Compile Include="stm32f429i_discovery_ioe.c" />
+    <Compile Include="stm32f429i_discovery_ioe.cpp" />
     <IncludePaths Include="DeviceCode\Targets\Native\STM32F4\DeviceCode\STM32F4x9_HAL_Lib" />
   </ItemGroup>
   <Import Project="$(SPOCLIENT)\tools\targets\Microsoft.SPOT.System.Targets" />

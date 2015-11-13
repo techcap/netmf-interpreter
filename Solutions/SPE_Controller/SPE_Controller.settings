@@ -9,24 +9,25 @@
     <PLATFORM>SPE_Controller</PLATFORM>
     <IsSolutionWizardVisible>True</IsSolutionWizardVisible>
     <ENDIANNESS>le</ENDIANNESS>
-    <OEMSystemInfoString>Smart Controller by Sudo Premium Engineering Co., Ltd.</OEMSystemInfoString>
     <NO_BOOTLOADER_COMPRESSION>true</NO_BOOTLOADER_COMPRESSION>
     <TCP_IP_STACK>LWIP_1_4_1_OS</TCP_IP_STACK>
-	<OEMSystemInfoString>2.0</OEMSystemInfoString>
+    <OEMSystemInfoString>Smart Controller by Sudo Premium Engineering Co., Ltd.</OEMSystemInfoString>
   </PropertyGroup>
   <ItemGroup>
-    <IncludePaths Include="Solutions\SPE_Controller" />
     <!--<TinyCLR_Defines Include="PLATFORM_DEPENDENT_HEAP_SIZE_THRESHOLD=10240" />
     <TinyCLR_Defines Include="PLATFORM_DEPENDENT_HEAP_SIZE_THRESHOLD_UPPER=131072" />-->
-    <TinyCLR_Defines Include="STM32F429X" />
-    <TinyCLR_Defines Include="STM32F429_439xx" />
-    
-    <IncludePaths Include="DeviceCode\Targets\Native\STM32F4\DeviceCode" />
-    <IncludePaths Include="DeviceCode\Targets\Native\STM32F4\DeviceCode\STM32_Bootstrap" />
+    <!--<TinyCLR_Defines Include="STM32F429X" />-->
+    <!--<TinyCLR_Defines Include="STM32F429_439xx" />-->
     
     <!--<TinyCLR_Defines Include="USE_STDPERIPH_DRIVER" />-->
     <!--<TinyCLR_Defines Include="PLATFORM_NO_CLR_TRACE=1" />-->
     <!--<TinyCLR_Defines Include="TINYCLR_NO_IL_INLINE=1" />-->
+
+    <IncludePaths Include="Solutions\SPE_Controller" />
+    <IncludePaths Include="DeviceCode\Cores\arm\Processors\CortexMx" />
+
+    <IncludePaths Include="DeviceCode\Targets\Native\STM32F4\DeviceCode" />
+    <IncludePaths Include="DeviceCode\Targets\Native\STM32F4\DeviceCode\STM32_Bootstrap" />
   </ItemGroup>
   <Import Project="$(SPOCLIENT)\devicecode\Targets\Native\STM32F4\STM32F4.settings" />
   <Import Project="$(SPOCLIENT)\devicecode\Targets\OS\CMSIS_RTOS\CMSIS_RTOS.settings" Condition="'$(reducesize)' == 'false' AND '$(TCP_IP_STACK)'=='LWIP_1_4_1_OS'"/>

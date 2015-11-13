@@ -26,11 +26,12 @@
     <Version>4.0.0.0</Version>
   </PropertyGroup>
   <Import Project="$(SPOCLIENT)\tools\targets\Microsoft.SPOT.System.Settings" />
+  <PropertyGroup />
   <ItemGroup>
-    <Compile Include="IO_Init.cpp" />
-    <Compile Include="stm32f429i_discovery_sdram.c" />
+    <HFiles Include="$(SPOCLIENT)\DeviceCode\Targets\Native\STM32F4\DeviceCode\stm32f4xx.h" />
     <IncludePaths Include="DeviceCode\Targets\Native\STM32F4\DeviceCode\STM32F4x9_HAL_Lib" />
+    <Compile Include="IO_Init.cpp" />
+    <Compile Include="stm32f429i_discovery_sdram.cpp" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(SPOCLIENT)\tools\targets\Microsoft.SPOT.System.Targets" />
 </Project>
