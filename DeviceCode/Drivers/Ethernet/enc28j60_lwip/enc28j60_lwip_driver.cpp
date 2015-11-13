@@ -190,7 +190,7 @@ int ENC28J60_LWIP_Driver::Open( ENC28J60_LWIP_DRIVER_CONFIG* config, int index )
 
     iface = &g_NetworkConfig.NetworkInterfaces[index];
 
-	bool isDHCP = (iface->flags & SOCK_NETWORKCONFIGURATION_FLAGS_DHCP) != 0;
+	  bool isDHCP = (iface->flags & SOCK_NETWORKCONFIGURATION_FLAGS_DHCP) != 0;
     if(!isDHCP)
     {
         ipaddr.addr  = iface->ipaddr;

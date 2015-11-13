@@ -9,7 +9,6 @@
     <IsClrProject>False</IsClrProject>
     <InteropFeatures />
     <ExtraAssemblies />
-    <ProjectPath>$(SPOCLIENT)\Solutions\SPE_Controller\TinyBooter\TinyBooter.proj</ProjectPath>
     <MFSettingsFile>$(SPOCLIENT)\Solutions\SPE_Controller\SPE_Controller.settings</MFSettingsFile>
     <IsSolutionWizardVisible>True</IsSolutionWizardVisible>
     <reducesize>true</reducesize>
