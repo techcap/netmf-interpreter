@@ -43,3 +43,4 @@ Listings/
 *.axfdump
 /crypto/lib
 /Work/Output
+/DeviceCode/Spe/Spe.Hardware/bin/Debug
