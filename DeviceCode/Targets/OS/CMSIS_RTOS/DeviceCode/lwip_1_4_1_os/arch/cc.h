@@ -36,7 +36,9 @@
 #include <stdlib.h>
 #include <stdint.h>
 
-#define LWIP_PROVIDE_ERRNO
+#ifndef LWIP_PROVIDE_ERRNO
+#define LWIP_PROVIDE_ERRNO      1
+#endif
 
 /* Define platform endianness (might already be defined) */
 #ifndef BYTE_ORDER
