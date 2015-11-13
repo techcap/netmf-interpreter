@@ -27,8 +27,6 @@ void TIM5_IRQHandler(void);
 
 HRESULT Watchdog_Enable(UINT32 TimeoutMilliseconds, WATCHDOG_INTERRUPT_CALLBACK isr, void* context)
 {
-	return CLR_E_FAIL;
-
 	uwLsiFreq = 32768; //GetLSIFrequency(); Timer: For measuring exact lsi freq
 
 	IWDG->KR = IWDG_WriteAccess_Enable;
