@@ -30,7 +30,7 @@
     <CompressImageFlashSym>EntryPoint</CompressImageFlashSym>
     <CompressImageDatSym>TinyClr_Dat_Start</CompressImageDatSym>
     <CompressImageCfgSym>g_ConfigurationSector</CompressImageCfgSym>
-    <USE_SSL Condition="'$(FLAVOR)'=='Release'">true</USE_SSL>
+    <USE_SSL Condition="'$(FLAVOR)'=='Release'">false</USE_SSL>
   </PropertyGroup>
   <ItemGroup>
     <CompressImageSymdef Include="$(BIN_DIR)\$(AssemblyName).symdefs" />

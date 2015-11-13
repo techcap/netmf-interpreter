@@ -6,19 +6,14 @@
 
 #include <limits.h>
 
-#ifndef DEBUG
-#define DEBUG
-#endif
-
 #if DEBUG || _DEBUG
-#define LWIP_DEBUG 1
+#define LWIP_DEBUG 0
 #define LWIP_DBG_TYPES_ON ( LWIP_DBG_TRACE | LWIP_DBG_STATE )
 #define LWIP_DBG_MIN_LEVEL LWIP_DBG_LEVEL_ALL
 //#define UDP_DEBUG LWIP_DBG_ON
 //#define ETHARP_DEBUG LWIP_DBG_ON
 //#define DHCP_DEBUG LWIP_DBG_ON
 //#define TIMERS_DEBUG LWIP_DBG_ON
-#define TCPIP_DEBUG                     LWIP_DBG_ON
 #endif
 
 #define ERRNO                           1
@@ -70,6 +65,5 @@
 #define TCP_KEEPIDLE_DEFAULT            10000UL // Default KEEPALIVE timer in milliseconds
 #define TCP_KEEPINTVL_DEFAULT           2000UL  // Default Time between KEEPALIVE probes in milliseconds
 #define TCP_KEEPCNT_DEFAULT             9U      // Default Counter for KEEPALIVE probes
-
 
 #endif /* __LWIPOPTS_H__ */
