@@ -360,7 +360,7 @@ void HAL_Initialize()
 
     //FileSystemVolumeList::InitializeVolumes();
 
-    //LCD_Initialize();
+    LCD_Initialize();
     
 #if !defined(HAL_REDUCESIZE)
     CPU_InitializeCommunication();
@@ -380,8 +380,8 @@ void HAL_Initialize()
     //Charger_Initialize();
 
     PalEvent_Initialize();
-    //Gesture_Initialize();
-    //Ink_Initialize();
+    Gesture_Initialize();
+    Ink_Initialize();
     TimeService_Initialize();
 
 #if defined(ENABLE_NATIVE_PROFILER)
@@ -460,7 +460,7 @@ void HAL_Uninitialize()
         }
     }    
 
-    //LCD_Uninitialize();
+    LCD_Uninitialize();
 
     I2C_Uninitialize();
 
@@ -475,8 +475,8 @@ void HAL_Uninitialize()
     //Charger_Uninitialize();
 
     TimeService_UnInitialize();
-    //Ink_Uninitialize();
-    //Gesture_Uninitialize();
+    Ink_Uninitialize();
+    Gesture_Uninitialize();
     PalEvent_Uninitialize();
 
     SOCKETS_CloseConnections();

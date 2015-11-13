@@ -44,7 +44,7 @@
     <IncludePaths Include="DeviceCode\PAL\OpenSSL\OpenSSL_1_0" />
     <IncludePaths Include="DeviceCode\Targets\OS\CMSIS_RTOS\DeviceCode\lwip_1_4_1_os" />
     <IncludePaths Include="DeviceCode\Targets\Native\STM32F4\DeviceCode\STM32F4x9_HAL_Lib" />
- 
+
     <Compile Include="allocator.cpp" />
     <Compile Include="tinyclr.cpp" />
     <Compile Include="WatchDog.cpp" />
@@ -180,7 +180,7 @@
     <DriverLibs Include="STM32F4_time.$(LIB_EXT)" />
     <RequiredProjects Include="$(SPOCLIENT)\DeviceCode\Targets\Native\STM32F4\DeviceCode\STM32F4_time\dotNetMF.proj" />
   </ItemGroup>
-  
+
   <ItemGroup Condition="'$(NO_WATCHDOG)'!='true'">
     <DriverLibs Include="Watchdog_pal.$(LIB_EXT)" />
     <RequiredProjects Include="$(SPOCLIENT)\DeviceCode\Pal\Watchdog\dotNetMF.proj" />
@@ -193,7 +193,7 @@
     <RequiredProjects Include="$(SPOCLIENT)\DeviceCode\Pal\Watchdog\stubs\dotNetMF.proj" />
   </ItemGroup>
 
-  
+
   <ItemGroup>
     <DriverLibs Include="asyncproccall_pal.$(LIB_EXT)" />
     <RequiredProjects Include="$(SPOCLIENT)\DeviceCode\PAL\AsyncProcCall\dotNetMF.proj" />
@@ -258,10 +258,7 @@
     <DriverLibs Include="cpu_cache_stubs.$(LIB_EXT)" />
     <RequiredProjects Include="$(SPOCLIENT)\DeviceCode\Drivers\stubs\processor\stubs_cache\dotNetMF.proj" />
   </ItemGroup>
-  <ItemGroup>
-    <DriverLibs Include="cpu_LCD_stubs.$(LIB_EXT)" />
-    <RequiredProjects Include="$(SPOCLIENT)\DeviceCode\Drivers\stubs\processor\stubs_lcd\dotNetMF.proj" />
-  </ItemGroup>
+
   <ItemGroup>
     <DriverLibs Include="STM32F4_Flash_x9.$(LIB_EXT)" />
     <RequiredProjects Include="$(SPOCLIENT)\DeviceCode\Targets\Native\STM32F4\DeviceCode\STM32F4_Flash\dotNetMF_x9.proj" />
@@ -402,7 +399,7 @@
     <DriverLibs Include="FS_FAT.$(LIB_EXT)" />
     <RequiredProjects Include="$(SPOCLIENT)\DeviceCode\Drivers\FS\FAT\dotNetMF.proj" />
   </ItemGroup>
-  
+
 
   <ItemGroup Condition="'$(TCP_IP_STACK)'=='LWIP_1_4_1_OS'">
     <RequiredProjects Include="$(SPOCLIENT)\DeviceCode\PAL\COM\Sockets_lwip_os\dotNetMF.proj" />
@@ -549,18 +546,18 @@
 
     <DriverLibs Include="graphics_pal.$(LIB_EXT)" />
     <RequiredProjects Include="$(SPOCLIENT)\DeviceCode\PAL\Graphics\dotNetMF.proj" />
-	
-	<DriverLibs Include="TouchPanel_pal.$(LIB_EXT)" />
+
+    <DriverLibs Include="TouchPanel_pal.$(LIB_EXT)" />
     <RequiredProjects Include="$(SPOCLIENT)\DeviceCode\Pal\TouchPanel\dotNetMF.proj" />
 
     <DriverLibs Include="TouchPanel_HAL_SPE_Controller.$(LIB_EXT)" />
     <RequiredProjects Include="$(SPOCLIENT)\Solutions\SPE_Controller\DeviceCode\TouchPanel_HAL\dotNetMF.proj" />
-    
+
     <DriverLibs Include="TouchScreen_Config_HAL_SPE_Controller.$(LIB_EXT)" />
     <RequiredProjects Include="$(SPOCLIENT)\Solutions\SPE_Controller\DeviceCode\TouchScreen_Config_HAL\dotNetMF.proj" />
 
   </ItemGroup>
-  <!-- LCD 사용 안할 때-->
+  <!-- LCD 사용 안할 때--><!--
   <ItemGroup Condition="'$(NO_LCD)'=='true'">
     <DriverLibs Include="Ink_pal_stubs.$(LIB_EXT)" />
     <RequiredProjects Include="$(SPOCLIENT)\DeviceCode\Pal\Ink\stubs\dotNetMF.proj" />
@@ -573,13 +570,16 @@
 
     <DriverLibs Include="graphics_pal_stubs.$(LIB_EXT)" />
     <RequiredProjects Include="$(SPOCLIENT)\DeviceCode\PAL\Graphics\stubs\dotNetMF.proj" />
-    
+
     <DriverLibs Include="touchpanel_hal_stubs.$(LIB_EXT)" />
     <RequiredProjects Include="$(SPOCLIENT)\DeviceCode\Drivers\TouchPanel\stubs\dotNetMF.proj" />
 
     <DriverLibs Include="TouchPanel_Config_stubs.$(LIB_EXT)" />
     <RequiredProjects Include="$(SPOCLIENT)\DeviceCode\Drivers\Stubs\TouchPanel\Config\dotNetMF.proj" />
-  </ItemGroup>
+
+    <DriverLibs Include="cpu_LCD_stubs.$(LIB_EXT)" />
+    <RequiredProjects Include="$(SPOCLIENT)\DeviceCode\Drivers\stubs\processor\stubs_lcd\dotNetMF.proj" />
+  </ItemGroup>-->
 
 
   <ItemGroup Condition="'$(USE_BUTTON)'=='true'">
@@ -614,7 +614,7 @@
   <ItemGroup Condition="'$(NO_USE_TIMESERVICE)'!='true'">
     <RequiredProjects Include="$(SPOCLIENT)\CLR\Libraries\SPOT_TimeService\dotnetmf.proj" />
     <PlatformIndependentLibs Include="SPOT_TimeService.$(LIB_EXT)" />
-    
+
     <DriverLibs Include="TimeService_pal.$(LIB_EXT)" />
     <RequiredProjects Include="$(SPOCLIENT)\DeviceCode\Pal\TimeService\dotNetMF.proj" />
 
@@ -627,7 +627,7 @@
   <ItemGroup Condition="'$(NO_USE_TIMESERVICE)'=='true'">
     <DriverLibs Include="TimeService_pal_stubs.$(LIB_EXT)" />
     <RequiredProjects Include="$(SPOCLIENT)\DeviceCode\Pal\TimeService\stubs\dotNetMF.proj" />
-  </ItemGroup>  
+  </ItemGroup>
 
   <ItemGroup>
     <PlatformIndependentLibs Include="Debugger.$(LIB_EXT)" />
