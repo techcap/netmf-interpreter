@@ -352,13 +352,13 @@ void HAL_Initialize()
 
     BlockStorageList::InitializeDevices();
 
-    //FS_Initialize();
+    FS_Initialize();
 
-    //FileSystemVolumeList::Initialize();
+    FileSystemVolumeList::Initialize();
 
-    //FS_AddVolumes();
+    FS_AddVolumes();
 
-    //FileSystemVolumeList::InitializeVolumes();
+    FileSystemVolumeList::InitializeVolumes();
 
     LCD_Initialize();
     
@@ -371,13 +371,13 @@ void HAL_Initialize()
     Buttons_Initialize();
 
     // Initialize the backlight to a default off state
-    //BackLight_Initialize();
+    BackLight_Initialize();
 
-    //Piezo_Initialize();
+    Piezo_Initialize();
 
-    //Battery_Initialize();
+    Battery_Initialize();
 
-    //Charger_Initialize();
+    Charger_Initialize();
 
     PalEvent_Initialize();
     Gesture_Initialize();
@@ -467,12 +467,12 @@ void HAL_Uninitialize()
     Buttons_Uninitialize();
 
     // Initialize the backlight to a default off state
-    //BackLight_Uninitialize();
+    BackLight_Uninitialize();
 
-    //Piezo_Uninitialize();
+    Piezo_Uninitialize();
 
-    //Battery_Uninitialize();
-    //Charger_Uninitialize();
+    Battery_Uninitialize();
+    Charger_Uninitialize();
 
     TimeService_UnInitialize();
     Ink_Uninitialize();
@@ -485,7 +485,7 @@ void HAL_Uninitialize()
     CPU_UninitializeCommunication();
 #endif
 
-    //FileSystemVolumeList::UninitializeVolumes();
+    FileSystemVolumeList::UninitializeVolumes();
 
     BlockStorageList::UnInitializeDevices();
 
@@ -565,6 +565,7 @@ void BootEntry()
 #if !defined(BUILD_RTM)
     g_Boot_RAMConstants_CRC = Checksum_RAMConstants();
 #endif
+
 
     CPU_Initialize();
 
