@@ -172,8 +172,6 @@ INT32 NativeADC::NativeADCReadSquareSum(CLR_RT_HeapBlock* pMngObj, INT32 pin, IN
 		HAL_Time_Sleep_MicroSeconds(delay / ticksPerUS + 1);	//+1 for rounding up
 	}
 
-	free(averageBuffer);
-
 	int sum = 0;
 	for (int i = 0; i < count; i++)
 	{
