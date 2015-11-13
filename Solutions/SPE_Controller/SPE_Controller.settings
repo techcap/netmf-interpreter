@@ -11,7 +11,7 @@
     <ENDIANNESS>le</ENDIANNESS>
     <NO_BOOTLOADER_COMPRESSION>true</NO_BOOTLOADER_COMPRESSION>
     <TCP_IP_STACK>LWIP_1_4_1_OS</TCP_IP_STACK>
-    <OEMSystemInfoString>Smart Controller by Sudo Premium Engineering Co., Ltd.</OEMSystemInfoString>
+    <OEMSystemInfoString>20151113</OEMSystemInfoString>
   </PropertyGroup>
   <ItemGroup>
     <!--<TinyCLR_Defines Include="PLATFORM_DEPENDENT_HEAP_SIZE_THRESHOLD=10240" />
