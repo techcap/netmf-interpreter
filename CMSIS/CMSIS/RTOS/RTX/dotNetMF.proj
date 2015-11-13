@@ -37,6 +37,7 @@
         <IncludePaths Include="CMSIS\CMSIS\Driver\Include" />
     </ItemGroup>
     <ItemGroup>
+      <TinyCLR_Defines Include="__FPU_PRESENT" />
         <Compile Condition="$(AS_SUBDIR) == 'RVD_S'" Include="SRC\ARM\SVC_Table.s" />
         <Compile Condition="$(AS_SUBDIR) == 'GNU_S'" Include="SRC\GCC\SVC_Table.s" />
         <Compile Include="SRC\HAL_CM.c" />
