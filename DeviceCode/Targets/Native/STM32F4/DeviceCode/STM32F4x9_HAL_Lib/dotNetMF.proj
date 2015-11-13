@@ -51,6 +51,7 @@
     <Compile Include="stm32f4xx_i2c.c" />
     <Compile Include="stm32f4xx_dma.c" />
     <Compile Include="stm32f4xx_pwr.c" />
+    <Compile Include="stm32f4xx_tim.c" />
     <Compile Include="stm32f4xx_rtc.c" />
     <Compile Include="stm32f4xx_usart.c" />
     <Compile Include="misc.c" />
