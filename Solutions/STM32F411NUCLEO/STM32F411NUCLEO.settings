@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build">
+  <PropertyGroup>
+    <Author>CW2</Author>
+    <Description>
+      <!--
+        NETMF port to NUCLEO-F411RE (STM32F411RET6 Cortex-M4F) board from STMicroelectronics.
+        http://www.st.com/web/catalog/tools/FM116/SC959/SS1532/LN1847/PF260320
+        Based on the STM32F4 port by Oberon Systems, CSA Engineering and, Mountaineering Group.
+       -->
+    </Description>
+    <Documentation />
+    <PlatformGuid>{FD61C722-F11C-4E58-8081-C33FB7C5D5DD}</PlatformGuid>
+    <TARGETPLATFORM>STM32F411NUCLEO</TARGETPLATFORM>
+    <PLATFORM>STM32F411NUCLEO</PLATFORM>
+    <IsSolutionWizardVisible>True</IsSolutionWizardVisible>
+    <ENDIANNESS>le</ENDIANNESS>
+    <NO_BOOTLOADER_COMPRESSION>true</NO_BOOTLOADER_COMPRESSION>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OEMSystemInfoString>20151118</OEMSystemInfoString>
+  </PropertyGroup>
+  <ItemGroup>
+    <IncludePaths Include="Solutions\STM32F411NUCLEO" />
+  </ItemGroup>
+  <Import Project="$(SPOCLIENT)\devicecode\Targets\Native\STM32F4\STM32F4.settings" />
+</Project>

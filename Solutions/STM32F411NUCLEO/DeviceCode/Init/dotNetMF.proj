@@ -1,0 +1,36 @@
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectPath>$(SPOCLIENT)\Solutions\STM32F411NUCLEO\DeviceCode\Init\dotnetmf.proj</ProjectPath>
+    <AssemblyName>IO_Init_STM32F411NUCLEO</AssemblyName>
+    <Size>
+    </Size>
+    <ProjectGuid>{DFEBA046-7CFD-423C-8D65-B12927CF4AB7}</ProjectGuid>
+    <Description>IO port initialization for STM32F411NUCLEO solution</Description>
+    <Level>HAL</Level>
+    <LibraryFile>IO_Init_STM32F411NUCLEO.$(LIB_EXT)</LibraryFile>
+    <ManifestFile>IO_Init_STM32F411NUCLEO.$(LIB_EXT).manifest</ManifestFile>
+    <Groups>Solutions\STM32F411NUCLEO</Groups>
+    <LibraryCategory>
+    </LibraryCategory>
+    <Documentation>
+    </Documentation>
+    <PlatformIndependent>False</PlatformIndependent>
+    <CustomSpecific>
+    </CustomSpecific>
+    <Required>False</Required>
+    <IgnoreDefaultLibPath>False</IgnoreDefaultLibPath>
+    <IsStub>False</IsStub>
+    <Directory>Solutions\STM32F411NUCLEO\DeviceCode\Init</Directory>
+    <OutputType>Library</OutputType>
+    <PlatformIndependentBuild>false</PlatformIndependentBuild>
+    <Version>4.0.0.0</Version>
+  </PropertyGroup>
+  <Import Project="$(SPOCLIENT)\tools\targets\Microsoft.SPOT.System.Settings" />
+  <PropertyGroup />
+  <ItemGroup>
+    <HFiles Include="$(SPOCLIENT)\DeviceCode\Targets\Native\STM32F4\DeviceCode\stm32f4xx.h" />
+    <Compile Include="IO_Init.cpp" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(SPOCLIENT)\tools\targets\Microsoft.SPOT.System.Targets" />
+</Project>

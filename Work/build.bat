@@ -1,7 +1,7 @@
 @echo off
 
-SET ProjectName=SPE_Controller
-SET Flavor=debug
+SET ProjectName=STM32F411NUCLEO
+SET Flavor=release
 
 call ..\setenv_mdk.cmd 5.05 c:\Keil_v5\ARM
 

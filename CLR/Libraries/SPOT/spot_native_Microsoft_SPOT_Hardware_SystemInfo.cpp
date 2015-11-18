@@ -43,7 +43,8 @@ HRESULT Library_spot_native_Microsoft_SPOT_Hardware_SystemInfo::get_OEMString___
 
         Solution_GetReleaseInfo( releaseInfo );
 
-        TINYCLR_SET_AND_LEAVE(stack.SetResult_String( (LPCSTR)releaseInfo.infoString ));
+        //TINYCLR_SET_AND_LEAVE(stack.SetResult_String( (LPCSTR)releaseInfo.infoString ));
+		TINYCLR_SET_AND_LEAVE(stack.SetResult_String((LPCSTR)__DATE__));
     }
     TINYCLR_NOCLEANUP();
 }
