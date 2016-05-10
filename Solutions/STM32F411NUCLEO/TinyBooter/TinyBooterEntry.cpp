@@ -123,7 +123,7 @@ void TinyBooter_OnStateChange( TinyBooterState state, void* data, void ** retDat
         ////////////////////////////////////////////////////////////////////////////////////
         case State_EnterBooterMode:
             // Turn on all user LEDs
-            CPU_GPIO_EnableOutputPin(LED2, TRUE);
+            //CPU_GPIO_EnableOutputPin(LED2, TRUE);
 
             hal_fprintf( STREAM_LCD, "Waiting\r" );
             break;

@@ -16,6 +16,8 @@
 
 #define USB_ALLOW_CONFIGURATION_OVERRIDE 1
 
+#define AQSensor
+
 //
 // processor and features
 //
@@ -89,10 +91,15 @@
 // COM1 (0) - USART1 (APB2)
 // COM2 (1) - USART2 (APB1)
 
-//                              USART1 (APB2)             USART2 (ABP1)
-#define STM32F4_UART_TXD_PINS { PORT_PIN(GPIO_PORTA,  9), PORT_PIN(GPIO_PORTA, 2) }
-#define STM32F4_UART_RXD_PINS { PORT_PIN(GPIO_PORTA, 10), PORT_PIN(GPIO_PORTA, 3) }
-
+#if defined(AQSensor)
+	//                              USART1 (APB2)             USART2 (ABP1)
+	#define STM32F4_UART_TXD_PINS { PORT_PIN(GPIO_PORTA, 2)}
+	#define STM32F4_UART_RXD_PINS { PORT_PIN(GPIO_PORTA, 3)}
+#else
+	//                              USART1 (APB2)             USART2 (ABP1)
+	#define STM32F4_UART_TXD_PINS { PORT_PIN(GPIO_PORTA,  9), PORT_PIN(GPIO_PORTA, 2) }
+	#define STM32F4_UART_RXD_PINS { PORT_PIN(GPIO_PORTA, 10), PORT_PIN(GPIO_PORTA, 3) }
+#endif
 
 //                              USART2                   USART6                   USART1
 //#define STM32F4_UART_RXD_PINS { PORT_PIN(GPIO_PORTA, 3) } //, PORT_PIN(GPIO_PORTC,  7), PORT_PIN(GPIO_PORTA, 10) }
@@ -105,8 +112,12 @@
 //#define STM32F4_UART_RTS_PINS {(BYTE)GPIO_PIN_NONE } //, 52, 60} // GPIO_PIN_NONE, D4, D12
 
 // FIXME: Pin Configuration
-#define STM32F4_ADC 3
-#define STM32F4_AD_CHANNELS {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15}
+#define STM32F4_ADC 1
+#if defined(AQSensor)
+	#define STM32F4_AD_CHANNELS {0,1,4,5,6,7}
+#else
+	#define STM32F4_AD_CHANNELS {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15}
+#endif
 
 #define STM32F4_PWM_TIMER {4,4,4,4}
 #define STM32F4_PWM_CHNL  {0,1,2,3}
@@ -117,17 +128,22 @@
 #define STM32F4_SPI_MOSI_PINS {7, 31, 44} // PA7, PB15, PC12
 
 #define STM32F4_I2C_PORT     1
-#define STM32F4_I2C_SCL_PIN  PORT_PIN( GPIO_PORTB, 8 ) // PB8
-#define STM32F4_I2C_SDA_PIN  PORT_PIN( GPIO_PORTB, 9 ) // PB9
-
+#if defined(AQSensor)
+	#define STM32F4_I2C_SCL_PIN  PORT_PIN( GPIO_PORTB, 6 ) // PB6
+	#define STM32F4_I2C_SDA_PIN  PORT_PIN( GPIO_PORTB, 7 ) // PB7
+//TODO : 2개 지원해야 함. PB10, PB9
+#else
+	#define STM32F4_I2C_SCL_PIN  PORT_PIN( GPIO_PORTB, 8 ) // PB8
+	#define STM32F4_I2C_SDA_PIN  PORT_PIN( GPIO_PORTB, 9 ) // PB9
+#endif
 
 // User LEDs
-#define LED2                            PORT_PIN(GPIO_PORTA, 5) // Green
+//#define LED2                            PORT_PIN(GPIO_PORTA, 5) // Green
 
 // TinyBooter entry using GPIO
-#define TINYBOOTER_ENTRY_GPIO_PIN       PORT_PIN(GPIO_PORTC, 13)  // 'User' button
-#define TINYBOOTER_ENTRY_GPIO_STATE     FALSE                     // Active low
-#define TINYBOOTER_ENTRY_GPIO_RESISTOR  RESISTOR_DISABLED         // No internal resistor, there is external pull-up (R30)
+//#define TINYBOOTER_ENTRY_GPIO_PIN       PORT_PIN(GPIO_PORTC, 13)  // 'User' button
+//#define TINYBOOTER_ENTRY_GPIO_STATE     FALSE                     // Active low
+//#define TINYBOOTER_ENTRY_GPIO_RESISTOR  RESISTOR_DISABLED         // No internal resistor, there is external pull-up (R30)
 
 //
 // constants

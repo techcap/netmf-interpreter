@@ -44,3 +44,6 @@ Listings/
 /crypto/lib
 /Work/Output
 !/Solutions/SPE_Controller/DeviceCode/Spe/Spe.Hardware/bin
+/.vs/config/applicationhost.config
+/netmf-interpreter.VC.db
+/netmf-interpreter.VC.VC.opendb

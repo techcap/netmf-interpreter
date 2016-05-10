@@ -225,11 +225,29 @@ void __section("SectionForBootstrapOperations") STM32F4_BootstrapCode()
     
     RCC->CFGR = RCC_CFGR_SW_HSI;         // sysclk = AHB = APB1 = APB2 = HSI (16MHz)
     RCC->CR &= ~(RCC_CR_PLLON | RCC_CR_PLLI2SON); // pll off
-    
+
 #if SYSTEM_CRYSTAL_CLOCK_HZ != 0
+	//__IO uint32_t StartUpCounter = 0, HSEStatus = 0;
+
 	// turn HSE on
     RCC->CR |= RCC_CR_HSEON;
-    while(!(RCC->CR & RCC_CR_HSERDY));
+	while (!(RCC->CR & RCC_CR_HSERDY));
+
+	//do
+	//{
+	//	HSEStatus = RCC->CR & RCC_CR_HSERDY;
+	//	StartUpCounter++;
+	//} while ((HSEStatus == 0) && (StartUpCounter != HSE_STARTUP_TIMEOUT));
+
+	//if ((RCC->CR & RCC_CR_HSERDY) != RESET)
+	//{
+	//	HSEStatus = (uint32_t)0x01; // all good
+	//}
+	//else
+	//{
+	//	HSEStatus = (uint32_t)0x00; 
+	//	NVIC_SystemReset();
+	//}
 #endif
     
     // Set flash access time and enable caches & prefetch buffer

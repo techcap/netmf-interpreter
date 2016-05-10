@@ -22,6 +22,11 @@ extern GenericPortTableEntry const* const g_GenericPorts[TOTAL_GENERIC_PORTS] = 
 
 void __section("SectionForBootstrapOperations") BootstrapCode_GPIO()
 {
+	//SWD //효과는 없는 것 같음.
+	CPU_GPIO_ReservePin(13, TRUE);
+	CPU_GPIO_ReservePin(14, TRUE);
+	CPU_GPIO_ReservePin(16 + 3, TRUE);
+
     // Enable GPIO clocks for ports A - C
     RCC->AHB1ENR |= RCC_AHB1ENR_GPIOAEN | RCC_AHB1ENR_GPIOBEN | RCC_AHB1ENR_GPIOCEN;
 }
