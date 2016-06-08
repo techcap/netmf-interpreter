@@ -277,7 +277,11 @@ void __section("SectionForBootstrapOperations") STM32F4_BootstrapCode()
             
     // minimal peripheral clocks
 #ifdef STM32F4XX
-    RCC->AHB1ENR = RCC_AHB1ENR_CCMDATARAMEN; // 64k RAM (CCM)
+	#ifdef STM32F411
+		RCC->AHB1ENR = 0;
+	#else
+		RCC->AHB1ENR = RCC_AHB1ENR_CCMDATARAMEN; // 64k RAM (CCM)
+	#endif
 #else
     RCC->AHB1ENR = 0;
 #endif

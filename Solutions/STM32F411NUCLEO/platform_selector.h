@@ -13,7 +13,7 @@
 #define PLATFORM_ARM_STM32F4  // STM32F4XX
 
 #define STM32F40_41xxx
-
+#define STM32F411
 #define USB_ALLOW_CONFIGURATION_OVERRIDE 1
 
 #define AQSensor
@@ -66,11 +66,6 @@
 
 // Communication
 
-#define TOTAL_USART_PORT                2 // FIXME: 3
-
-#define USART_DEFAULT_PORT              COM1
-#define USART_DEFAULT_BAUDRATE          115200
-
 #define TOTAL_GENERIC_PORTS             1 // 1 generic port extensions (ITM channel 0 )
 #define ITM_GENERIC_PORTNUM             0 // ITM0 is index 0 in generic port interface table
 
@@ -91,10 +86,14 @@
 // COM1 (0) - USART1 (APB2)
 // COM2 (1) - USART2 (APB1)
 
+#define TOTAL_USART_PORT                1 // 3
+#define USART_DEFAULT_PORT              COM1
+#define USART_DEFAULT_BAUDRATE          115200
+
 #if defined(AQSensor)
 	//                              USART1 (APB2)             USART2 (ABP1)
-	#define STM32F4_UART_TXD_PINS { PORT_PIN(GPIO_PORTA, 2)}
-	#define STM32F4_UART_RXD_PINS { PORT_PIN(GPIO_PORTA, 3)}
+	#define STM32F4_UART_TXD_PINS { PORT_PIN(GPIO_PORTB, 6)}
+	#define STM32F4_UART_RXD_PINS { PORT_PIN(GPIO_PORTB, 7)}
 #else
 	//                              USART1 (APB2)             USART2 (ABP1)
 	#define STM32F4_UART_TXD_PINS { PORT_PIN(GPIO_PORTA,  9), PORT_PIN(GPIO_PORTA, 2) }
@@ -113,11 +112,7 @@
 
 // FIXME: Pin Configuration
 #define STM32F4_ADC 1
-#if defined(AQSensor)
-	#define STM32F4_AD_CHANNELS {0,1,4,5,6,7}
-#else
-	#define STM32F4_AD_CHANNELS {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15}
-#endif
+#define STM32F4_AD_CHANNELS {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15}
 
 #define STM32F4_PWM_TIMER {4,4,4,4}
 #define STM32F4_PWM_CHNL  {0,1,2,3}
@@ -128,14 +123,8 @@
 #define STM32F4_SPI_MOSI_PINS {7, 31, 44} // PA7, PB15, PC12
 
 #define STM32F4_I2C_PORT     1
-#if defined(AQSensor)
-	#define STM32F4_I2C_SCL_PIN  PORT_PIN( GPIO_PORTB, 6 ) // PB6
-	#define STM32F4_I2C_SDA_PIN  PORT_PIN( GPIO_PORTB, 7 ) // PB7
-//TODO : 2개 지원해야 함. PB10, PB9
-#else
-	#define STM32F4_I2C_SCL_PIN  PORT_PIN( GPIO_PORTB, 8 ) // PB8
-	#define STM32F4_I2C_SDA_PIN  PORT_PIN( GPIO_PORTB, 9 ) // PB9
-#endif
+#define STM32F4_I2C_SCL_PIN  PORT_PIN( GPIO_PORTB, 9 )
+#define STM32F4_I2C_SDA_PIN  PORT_PIN( GPIO_PORTB, 10 )
 
 // User LEDs
 //#define LED2                            PORT_PIN(GPIO_PORTA, 5) // Green
