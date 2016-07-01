@@ -1,7 +1,7 @@
 @echo off
 
-REM SET ProjectName=SPE_Controller
-SET ProjectName=STM32F411NUCLEO
+SET ProjectName=SPE_Controller
+REM SET ProjectName=STM32F411NUCLEO
 
 REM SET Flavor=debug
 SET Flavor=release
