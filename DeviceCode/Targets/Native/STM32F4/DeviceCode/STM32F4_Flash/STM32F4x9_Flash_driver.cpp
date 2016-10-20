@@ -31,8 +31,8 @@ typedef UINT16 CHIP_WORD;
 #endif
 
 
-    static const unsigned int STM32F4_FLASH_KEY1 = 0x45670123;
-    static const unsigned int STM32F4_FLASH_KEY2 = 0xcdef89ab;
+    static const UINT32 STM32F4_FLASH_KEY1 = 0x45670123;
+    static const UINT32 STM32F4_FLASH_KEY2 = 0xcdef89ab;
 
 
 //--//
