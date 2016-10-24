@@ -2,11 +2,16 @@
 
 SET ProjectName=SPE_Controller
 REM SET ProjectName=STM32F411NUCLEO
+REM SET ProjectName=STM32F746NUCLEO
 
 REM SET Flavor=debug
 SET Flavor=release
 
+SET CompilerVersion=MDK5.05
+REM SET CompilerVersion=GCC5.4
+
 call ..\setenv_mdk.cmd 5.05 c:\Keil_v5\ARM
+REM call ..\setenv_gcc.cmd 5.4.1
 
 @echo If you want to rebuild, please add "rebuild" argument. Default build mode is "build".
 
@@ -31,12 +36,13 @@ del Output\*.* /q
 
 mkdir Output
 mkdir Output\Bin
-copy ..\BuildOutput\THUMB2FP\MDK5.05\le\FLASH\%Flavor%\%ProjectName%\bin\Tinybooter.hex Output\.
-copy ..\BuildOutput\THUMB2FP\MDK5.05\le\FLASH\%Flavor%\%ProjectName%\bin\tinyclr.hex\ER_CONFIG Output\ER_CONFIG.hex
-copy ..\BuildOutput\THUMB2FP\MDK5.05\le\FLASH\%Flavor%\%ProjectName%\bin\tinyclr.hex\ER_FLASH Output\ER_FLASH.hex
-copy ..\BuildOutput\THUMB2FP\MDK5.05\le\FLASH\%Flavor%\%ProjectName%\bin\Tinybooter.bin Output\bin\.
-copy ..\BuildOutput\THUMB2FP\MDK5.05\le\FLASH\%Flavor%\%ProjectName%\bin\tinyclr.bin\ER_CONFIG Output\bin\ER_CONFIG.bin
-copy ..\BuildOutput\THUMB2FP\MDK5.05\le\FLASH\%Flavor%\%ProjectName%\bin\tinyclr.bin\ER_FLASH Output\bin\ER_FLASH.bin
+
+copy ..\BuildOutput\THUMB2FP\%CompilerVersion%\le\FLASH\%Flavor%\%ProjectName%\bin\Tinybooter.hex Output\.
+copy ..\BuildOutput\THUMB2FP\%CompilerVersion%\le\FLASH\%Flavor%\%ProjectName%\bin\tinyclr.hex\ER_CONFIG Output\ER_CONFIG.hex
+copy ..\BuildOutput\THUMB2FP\%CompilerVersion%\le\FLASH\%Flavor%\%ProjectName%\bin\tinyclr.hex\ER_FLASH Output\ER_FLASH.hex
+copy ..\BuildOutput\THUMB2FP\%CompilerVersion%\le\FLASH\%Flavor%\%ProjectName%\bin\Tinybooter.bin Output\bin\.
+copy ..\BuildOutput\THUMB2FP\%CompilerVersion%\le\FLASH\%Flavor%\%ProjectName%\bin\tinyclr.bin\ER_CONFIG Output\bin\ER_CONFIG.bin
+copy ..\BuildOutput\THUMB2FP\%CompilerVersion%\le\FLASH\%Flavor%\%ProjectName%\bin\tinyclr.bin\ER_FLASH Output\bin\ER_FLASH.bin
 
 echo --- Ready to program hex files ---
 pause
