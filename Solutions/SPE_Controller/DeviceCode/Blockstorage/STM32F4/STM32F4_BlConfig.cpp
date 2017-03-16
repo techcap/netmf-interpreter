@@ -16,13 +16,13 @@
 #define FLASH_MANUFACTURER_CODE              0x0000  // not used
 #define FLASH_DEVICE_CODE                    0x0000  // not used
 //Flash Bank1 (1MB)
-#define FLASH_BASE_ADDRESS1                  0x08000000
+#define FLASH_BASE_ADDRESS1                  0x08000000 // 4x 16K
 #define FLASH_BLOCK_COUNT1                   4
 #define FLASH_BYTES_PER_BLOCK1               0x04000
-#define FLASH_BASE_ADDRESS2                  0x08010000
+#define FLASH_BASE_ADDRESS2                  0x08010000 // 1x 64K
 #define FLASH_BLOCK_COUNT2                   1
 #define FLASH_BYTES_PER_BLOCK2               0x10000
-#define FLASH_BASE_ADDRESS3                  0x08020000
+#define FLASH_BASE_ADDRESS3                  0x08020000 // 7x 128K
 #define FLASH_BLOCK_COUNT3                   7
 #define FLASH_BYTES_PER_BLOCK3               0x20000
 //Flash Bank2 (1MB)
