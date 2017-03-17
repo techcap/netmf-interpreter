@@ -21,106 +21,112 @@
 #endif
 
 
-static void (*g_STM32F4_stopHandler)();
-static void (*g_STM32F4_restartHandler)();
+static void(*g_STM32F4_stopHandler)();
+static void(*g_STM32F4_restartHandler)();
 
 
-void STM32F4_SetPowerHandlers(void (*stop)(), void (*restart)())
+void STM32F4_SetPowerHandlers(void(*stop)(), void(*restart)())
 {
-    g_STM32F4_stopHandler = stop;
-    g_STM32F4_restartHandler = restart;
+	g_STM32F4_stopHandler = stop;
+	g_STM32F4_restartHandler = restart;
 }
 
 
 BOOL CPU_Initialize()
 {
-    NATIVE_PROFILE_HAL_PROCESSOR_POWER();
-    CPU_INTC_Initialize();
-    return TRUE;
+	NATIVE_PROFILE_HAL_PROCESSOR_POWER();
+	CPU_INTC_Initialize();
+
+#if !defined(BUILD_RTM)
+	// enable debug on any low power mode   
+	DBGMCU->CR |= DBGMCU_CR_DBG_SLEEP + DBGMCU_CR_DBG_STOP + DBGMCU_CR_DBG_STANDBY;
+#endif
+
+	return TRUE;
 }
 
 void CPU_ChangePowerLevel(POWER_LEVEL level)
 {
-    switch(level)
-    {
-        case POWER_LEVEL__MID_POWER:
-            break;
+	switch (level)
+	{
+	case POWER_LEVEL__MID_POWER:
+		break;
 
-        case POWER_LEVEL__LOW_POWER:
-            break;
+	case POWER_LEVEL__LOW_POWER:
+		break;
 
-        case POWER_LEVEL__HIGH_POWER:
-        default:
-            break;
-    }
+	case POWER_LEVEL__HIGH_POWER:
+	default:
+		break;
+	}
 }
 
-void HAL_CPU_Sleep( SLEEP_LEVEL level, UINT64 wakeEvents )
+void HAL_CPU_Sleep(SLEEP_LEVEL level, UINT64 wakeEvents)
 {
-    NATIVE_PROFILE_HAL_PROCESSOR_POWER();
-    
-    switch(level) {
-        
-    case SLEEP_LEVEL__DEEP_SLEEP: // stop
-        // stop peripherals if needed
-        if (g_STM32F4_stopHandler != NULL)
-            g_STM32F4_stopHandler();
-        SCB->SCR |= SCB_SCR_SLEEPDEEP_Msk;
-        PWR->CR |= PWR_CR_CWUF | PWR_CR_FPDS | PWR_CR_LPDS; // low power deepsleep
-        __WFI(); // stop clocks and wait for external interrupt
+	NATIVE_PROFILE_HAL_PROCESSOR_POWER();
+
+	switch (level) {
+
+	case SLEEP_LEVEL__DEEP_SLEEP: // stop
+		// stop peripherals if needed
+		if (g_STM32F4_stopHandler != NULL)
+			g_STM32F4_stopHandler();
+		SCB->SCR |= SCB_SCR_SLEEPDEEP_Msk;
+		PWR->CR |= PWR_CR_CWUF | PWR_CR_FPDS | PWR_CR_LPDS; // low power deepsleep
+		__WFI(); // stop clocks and wait for external interrupt
 #if SYSTEM_CRYSTAL_CLOCK_HZ != 0
-        RCC->CR |= RCC_CR_HSEON;             // HSE on
+		RCC->CR |= RCC_CR_HSEON;             // HSE on
 #endif
-        SCB->SCR &= ~SCB_SCR_SLEEPDEEP_Msk;  // reset deepsleep
-        while(!(RCC->CR & RCC_CR_HSERDY));
-        RCC->CR |= RCC_CR_PLLON;             // pll on
-        while(!(RCC->CR & RCC_CR_PLLRDY));
-        RCC->CFGR |= RCC_CFGR_SW_PLL;        // sysclk = pll out
+		SCB->SCR &= ~SCB_SCR_SLEEPDEEP_Msk;  // reset deepsleep
+		while (!(RCC->CR & RCC_CR_HSERDY));
+		RCC->CR |= RCC_CR_PLLON;             // pll on
+		while (!(RCC->CR & RCC_CR_PLLRDY));
+		RCC->CFGR |= RCC_CFGR_SW_PLL;        // sysclk = pll out
 #if SYSTEM_CRYSTAL_CLOCK_HZ != 0
 		RCC->CR &= ~RCC_CR_HSION;            // HSI off
 #endif
-        // restart peripherals if needed
-        if (g_STM32F4_restartHandler != NULL)
-            g_STM32F4_restartHandler();
-        return;
-    case SLEEP_LEVEL__OFF: // standby
-        // stop peripherals if needed
-        if (g_STM32F4_stopHandler != NULL)
-            g_STM32F4_stopHandler();
-        SCB->SCR |= SCB_SCR_SLEEPDEEP_Msk;
-        PWR->CR |= PWR_CR_CWUF | PWR_CR_PDDS; // power down deepsleep
-        __WFI(); // soft power off, never returns
-        return;            
-    default: // sleep
-        PWR->CR |= PWR_CR_CWUF;
-        __WFI(); // sleep and wait for interrupt
-        return;
-    }
+		// restart peripherals if needed
+		if (g_STM32F4_restartHandler != NULL)
+			g_STM32F4_restartHandler();
+		return;
+	case SLEEP_LEVEL__OFF: // standby
+		// stop peripherals if needed
+		if (g_STM32F4_stopHandler != NULL)
+			g_STM32F4_stopHandler();
+		SCB->SCR |= SCB_SCR_SLEEPDEEP_Msk;
+		PWR->CR |= PWR_CR_CWUF | PWR_CR_PDDS; // power down deepsleep
+		__WFI(); // soft power off, never returns
+		return;
+	default: // sleep
+		PWR->CR |= PWR_CR_CWUF;
+		__WFI(); // sleep and wait for interrupt
+		return;
+	}
 }
 
 void CPU_Halt()  // unrecoverable error
 {
-    NATIVE_PROFILE_HAL_PROCESSOR_POWER();
-    while(1);
+	NATIVE_PROFILE_HAL_PROCESSOR_POWER();
+	while (1);
 }
 
 void CPU_Reset()
 {
-    NATIVE_PROFILE_HAL_PROCESSOR_POWER();
-    SCB->AIRCR = (0x5FA << SCB_AIRCR_VECTKEY_Pos)  // unlock key
-               | (1 << SCB_AIRCR_SYSRESETREQ_Pos); // reset request
-     while(1); // wait for reset
+	NATIVE_PROFILE_HAL_PROCESSOR_POWER();
+	SCB->AIRCR = (0x5FA << SCB_AIRCR_VECTKEY_Pos)  // unlock key
+		| (1 << SCB_AIRCR_SYSRESETREQ_Pos); // reset request
+	while (1); // wait for reset
 }
 
-BOOL CPU_IsSoftRebootSupported ()
+BOOL CPU_IsSoftRebootSupported()
 {
-    NATIVE_PROFILE_HAL_PROCESSOR_POWER();
-    return TRUE;
+	NATIVE_PROFILE_HAL_PROCESSOR_POWER();
+	return TRUE;
 }
 
 void HAL_AssertEx()
 {
-    __BKPT(0);
-    while(true) { /*nop*/ }
+	__BKPT(0);
+	while (true) { /*nop*/ }
 }
 
