@@ -61,5 +61,8 @@ ReleaseNotesCrypto.txt
 /Work/Output
 !/Solutions/SPE_Controller/DeviceCode/Spe/Spe.Hardware/bin
 /Work/MDK/project.uvoptx
+
+# Visual Studio 2015 cache/options directory
 .vs/
+
 /netmf-interpreter.VC.db
