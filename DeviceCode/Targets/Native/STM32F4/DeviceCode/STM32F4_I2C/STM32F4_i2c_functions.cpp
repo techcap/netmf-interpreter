@@ -172,13 +172,21 @@ BOOL I2C_Internal_Initialize()
 		currentI2CXAction = NULL;
 		currentI2CUnit = NULL;
 
-#ifdef STM32F4_I2C_PORT
+		GPIO_ALT_MODE mode = (GPIO_ALT_MODE)0x43;//AF4
+		CPU_GPIO_DisablePin(STM32F4_I2C_SCL_PIN, RESISTOR_PULLUP, 0, mode);
+
+//#ifdef STM32F4_I2C_PORT
 		// set pins to AF4 and open drain
 		if (STM32F4_I2C_PORT == 2 && STM32F4_I2C_SDA_PIN == 25)//PB9 
-			CPU_GPIO_DisablePin(STM32F4_I2C_SDA_PIN, RESISTOR_PULLUP, 0, (GPIO_ALT_MODE)0x93); //AF9
-		else
-#endif
-			CPU_GPIO_DisablePin(STM32F4_I2C_SDA_PIN, RESISTOR_PULLUP, 0, (GPIO_ALT_MODE)0x43); //AF4
+			mode = (GPIO_ALT_MODE)0x93;//AF9
+//#endif
+
+		CPU_GPIO_DisablePin(STM32F4_I2C_SDA_PIN, RESISTOR_PULLUP, 0, mode); //AF9
+
+		////{software reset
+		//I2Cx->CR1 |= I2C_CR1_SWRST;
+		//I2Cx->CR1 &= (uint16_t)~((uint16_t)I2C_CR1_SWRST);
+		////}
 
 		RCC->APB1ENR |= RCC_APB1ENR_I2CxEN; // enable I2C clock
 		RCC->APB1RSTR = RCC_APB1RSTR_I2CxRST; // reset I2C peripheral
