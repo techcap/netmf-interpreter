@@ -154,6 +154,7 @@ void STM32F4_I2C_EV_Interrupt(void* param) // Event Interrupt Handler
 			I2Cx->CR2 &= ~I2C_CR2_ITBUFEN; // disable I2C_SR1_RXNE interrupt
 			currentI2CUnit = xAction->m_xActionUnits[xAction->m_current++];
 			I2Cx->CR1 = I2C_CR1_PE | I2C_CR1_START | I2C_CR1_ACK; // send restart
+			//I2Cx->CR1 = I2C_CR1_PE | I2C_CR1_START | I2C_CR1_ACK | I2C_CR1_NOSTRETCH; // send restart
 		}
 		else {
 			xAction->Signal(I2C_HAL_XACTION::c_Status_Completed); // calls XActionStop()
@@ -177,8 +178,10 @@ BOOL I2C_Internal_Initialize()
 
 //#ifdef STM32F4_I2C_PORT
 		// set pins to AF4 and open drain
+#ifdef STM32F4_I2C_PORT
 		if (STM32F4_I2C_PORT == 2 && STM32F4_I2C_SDA_PIN == 25)//PB9 
 			mode = (GPIO_ALT_MODE)0x93;//AF9
+#endif
 //#endif
 
 		CPU_GPIO_DisablePin(STM32F4_I2C_SDA_PIN, RESISTOR_PULLUP, 0, mode); //AF9
@@ -198,6 +201,7 @@ BOOL I2C_Internal_Initialize()
 		I2Cx->OAR1 = 0x4000; // init address register
 
 		I2Cx->CR1 = I2C_CR1_PE; // enable peripheral
+		//I2Cx->CR1 = I2C_CR1_PE | I2C_CR1_NOSTRETCH; // enable peripheral
 
 		CPU_INTC_ActivateInterrupt(I2Cx_EV_IRQn, STM32F4_I2C_EV_Interrupt, 0);
 		CPU_INTC_ActivateInterrupt(I2Cx_ER_IRQn, STM32F4_I2C_ER_Interrupt, 0);
@@ -243,6 +247,7 @@ void I2C_Internal_XActionStart(I2C_HAL_XACTION* xAction, bool repeatedStart)
 	I2Cx->SR1 = 0; // reset error flags
 	I2Cx->CR2 |= I2C_CR2_ITEVTEN | I2C_CR2_ITERREN; // enable interrupts
 	I2Cx->CR1 = I2C_CR1_PE | I2C_CR1_START | I2C_CR1_ACK; // send start
+	//I2Cx->CR1 = I2C_CR1_PE | I2C_CR1_START | I2C_CR1_ACK | I2C_CR1_NOSTRETCH; // send start
 }
 
 void I2C_Internal_XActionStop()

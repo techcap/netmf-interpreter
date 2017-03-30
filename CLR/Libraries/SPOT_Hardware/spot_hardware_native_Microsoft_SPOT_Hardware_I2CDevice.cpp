@@ -13,6 +13,10 @@ HRESULT Library_spot_hardware_native_Microsoft_SPOT_Hardware_I2CDevice::Initiali
 
     TINYCLR_CHECK_HRESULT(CLR_RT_HeapBlock_I2CXAction::CreateInstance( *pThis, pThis[ FIELD__m_xAction ] ));
 
+	//{add for recovery
+	I2C_Uninitialize();
+	//}
+
     I2C_Initialize();
     
     TINYCLR_NOCLEANUP();
