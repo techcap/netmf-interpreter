@@ -13,7 +13,7 @@
     -->
     <!-- Internal FLASH -->
     <Set Name="IFLASH_BaseAddress"      Value="0x08000000"/>
-    <Set Name="IFLASH_Size"             Value="0x00080000"/><!-- 512KB -->
+    <Set Name="IFLASH_Size"             Value="0x00100000"/><!-- 1MB -->
 
     <!-- Internal SRAM -->
     <Set Name="IRAM_BaseAddress"        Value="0x20000000"/>
@@ -38,7 +38,7 @@
     <Set Name="Code_BaseAddress"        Value="%Config_BaseAddress% + %Config_Size%"/>
     <Set Name="Code_Size"               Value="0x00050000"/><!-- 320KB -->
 
-    <!-- Deployment fills the rest of flash... --><!-- 128KB -->
+    <!-- Deployment fills the rest of flash... --><!-- 128KB+512KB -->
 
     <!-- Internal SRAM -->
     <!-- FIXME: Dynamically after RAM_RW region, properly aligned. -->
