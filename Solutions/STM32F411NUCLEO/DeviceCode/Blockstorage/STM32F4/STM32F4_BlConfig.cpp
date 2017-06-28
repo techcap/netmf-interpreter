@@ -63,11 +63,11 @@ const BlockRange g_STM32F4_BlockRange2[] =
 
 const BlockRange g_STM32F4_BlockRange3[] =
 {
-	{ BlockRange::BLOCKTYPE_CODE      ,   0, 1 },  // 08020000 CLR         256k
-	{ BlockRange::BLOCKTYPE_DEPLOYMENT,   2, 3 },  // 08060000 deployment  256k
-	{ BlockRange::BLOCKTYPE_STORAGE_A,   4, 4 },   // 080A0000 StorageA    128k
-	{ BlockRange::BLOCKTYPE_STORAGE_B,   5, 5 },   // 080C0000 StorageB    128k
-	{ BlockRange::BLOCKTYPE_UPDATE,   6, 6 },      // 080E0000 Update  128k
+	{ BlockRange::BLOCKTYPE_CODE      ,   0, 2 },  // 08020000 CLR         256k
+	{ BlockRange::BLOCKTYPE_DEPLOYMENT,   3, 4 },  // 08060000 deployment  256k
+	{ BlockRange::BLOCKTYPE_UPDATE,   5, 5 },      // 080A0000 Update  128k
+	//{ BlockRange::BLOCKTYPE_STORAGE_A,   6, 6 },   // 080C0000 StorageA    128k
+	//{ BlockRange::BLOCKTYPE_STORAGE_B,   7, 7 },   // 080E0000 StorageB    128k
 };
 
 const BlockRegionInfo  g_STM32F4_BlkRegion[STM32F4__NUM_REGIONS] = 

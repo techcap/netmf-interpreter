@@ -36,9 +36,9 @@
 
     <!-- Native Code section -->
     <Set Name="Code_BaseAddress"        Value="%Config_BaseAddress% + %Config_Size%"/>
-    <Set Name="Code_Size"               Value="0x00050000"/><!-- 320KB -->
+    <Set Name="Code_Size"               Value="0x00070000"/><!-- 320KB+128KB -->
 
-    <!-- Deployment fills the rest of flash... --><!-- 128KB+512KB -->
+    <!-- Deployment fills the rest of flash... --><!-- 512KB -->
 
     <!-- Internal SRAM -->
     <!-- FIXME: Dynamically after RAM_RW region, properly aligned. -->

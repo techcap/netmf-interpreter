@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <FeatureName>Spe.Hardware</FeatureName>
+    <Guid>{f2196ca5-ecfc-47d0-8534-8ce46f76e6d9}</Guid>
+    <Description>&lt;Add Feature Description Here&gt;</Description>
+    <Groups />
+    <SPE_HARDWARE_FEATUREPROJ>True</SPE_HARDWARE_FEATUREPROJ>
+  </PropertyGroup>
+  <ItemGroup>
+    <DriverLibs Include="Spe_Hardware.$(LIB_EXT)" />
+    <InteropFeature Include="Spe_Hardware" />
+    <MMP_DAT_CreateDatabase Include="$(SPOCLIENT)\Solutions\$(PLATFORM)\DeviceCode\SPE\Spe.Hardware\bin\Debug\$(ENDIANNESS)\Spe.Hardware.pe" />
+    <RequiredProjects Include="$(SPOCLIENT)\Solutions\STM32F411NUCLEO\DeviceCode\Spe\SPE.Hardware\Stubs\dotnetmf.proj" />
+  </ItemGroup>
+</Project>
