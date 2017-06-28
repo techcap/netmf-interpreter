@@ -66,3 +66,4 @@ ReleaseNotesCrypto.txt
 .vs/
 
 /netmf-interpreter.VC.db
+/Work/*.zip
