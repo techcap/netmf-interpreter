@@ -21,9 +21,12 @@
 #define FLASH_BASE_ADDRESS2                  0x08010000 // 1x 64K
 #define FLASH_BLOCK_COUNT2                   1
 #define FLASH_BYTES_PER_BLOCK2               0x10000
-#define FLASH_BASE_ADDRESS3                  0x08020000 // 7x 128K
-#define FLASH_BLOCK_COUNT3                   7
+#define FLASH_BASE_ADDRESS3                  0x08020000 // 3x 128K
+#define FLASH_BLOCK_COUNT3                   3
 #define FLASH_BYTES_PER_BLOCK3               0x20000
+#define FLASH_BASE_ADDRESS4                  0x08080000 // 8x 64k
+#define FLASH_BLOCK_COUNT4                   8
+#define FLASH_BYTES_PER_BLOCK4               0x10000
 #define FLASH_BYTES_PER_SECTOR               2
 #define FLASH_BLOCK_ERASE_TYPICAL_TIME_USEC  1000000 // not used
 #define FLASH_SECTOR_WRITE_TYPICAL_TIME_USEC 10      // not used
@@ -48,7 +51,7 @@
 #define STM32F4__SUPPORTS_XIP      TRUE
 #define STM32F4__WRITE_PROTECTED   FALSE
 #define STM32F4__SUPP_COPY_BACK    FALSE
-#define STM32F4__NUM_REGIONS       3
+#define STM32F4__NUM_REGIONS       4
 
 const BlockRange g_STM32F4_BlockRange1[] =
 {
@@ -63,11 +66,16 @@ const BlockRange g_STM32F4_BlockRange2[] =
 
 const BlockRange g_STM32F4_BlockRange3[] =
 {
-	{ BlockRange::BLOCKTYPE_CODE      ,   0, 2 },  // 08020000 CLR         256k
-	{ BlockRange::BLOCKTYPE_DEPLOYMENT,   3, 4 },  // 08060000 deployment  256k
-	{ BlockRange::BLOCKTYPE_UPDATE,   5, 5 },      // 080A0000 Update  128k
-	//{ BlockRange::BLOCKTYPE_STORAGE_A,   6, 6 },   // 080C0000 StorageA    128k
-	//{ BlockRange::BLOCKTYPE_STORAGE_B,   7, 7 },   // 080E0000 StorageB    128k
+	{ BlockRange::BLOCKTYPE_CODE      ,   0, 2 },  // 08020000 CLR         256k+128k
+};
+
+const BlockRange g_STM32F4_BlockRange4[] =
+{
+	{ BlockRange::BLOCKTYPE_DEPLOYMENT,   0, 2 },  // 08080000 deployment  128k+64k
+	{ BlockRange::BLOCKTYPE_STORAGE_A,   3, 3 },   // 080B0000 StorageA    64k
+	{ BlockRange::BLOCKTYPE_STORAGE_B,   4, 4 },   // 080C0000 StorageB    64k
+	{ BlockRange::BLOCKTYPE_UPDATE,   5, 5 },      // 080D0000 Update  64k
+	//{ BlockRange::BLOCKTYPE_UPDATE,   6, 7 },    // 080E0000 Update  128k
 };
 
 const BlockRegionInfo  g_STM32F4_BlkRegion[STM32F4__NUM_REGIONS] = 
@@ -94,7 +102,15 @@ const BlockRegionInfo  g_STM32F4_BlkRegion[STM32F4__NUM_REGIONS] =
         FLASH_BYTES_PER_BLOCK3, // UINT32        BytesPerBlock;   // Total number of bytes per block
         ARRAYSIZE_CONST_EXPR(g_STM32F4_BlockRange3),
         g_STM32F4_BlockRange3,
-    }
+    },
+
+	{
+		FLASH_BASE_ADDRESS4,    // ByteAddress   Start;           // Starting Sector address
+		FLASH_BLOCK_COUNT4,     // UINT32        NumBlocks;       // total number of blocks in this region
+		FLASH_BYTES_PER_BLOCK4, // UINT32        BytesPerBlock;   // Total number of bytes per block
+		ARRAYSIZE_CONST_EXPR(g_STM32F4_BlockRange4),
+		g_STM32F4_BlockRange4,
+	}
 };
 
 const BlockDeviceInfo g_STM32F4_DeviceInfo=
