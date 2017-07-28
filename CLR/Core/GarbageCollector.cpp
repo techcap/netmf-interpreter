@@ -577,19 +577,19 @@ void CLR_RT_GarbageCollector::CheckMemoryPressure()
         //
         // Drop all the restored objects that haven't been reclaimed by an application.
         //
-        TINYCLR_FOREACH_NODE_BACKWARD(CLR_RT_HeapBlock_WeakReference,weak,g_CLR_RT_ExecutionEngine.m_weakReferences)
-        {
-            if(weak->m_identity.m_flags & CLR_RT_HeapBlock_WeakReference::WR_Restored)
-            {
-                if(weak->m_targetSerialized)
-                {
-                    fExit = true;
+        //TINYCLR_FOREACH_NODE_BACKWARD(CLR_RT_HeapBlock_WeakReference,weak,g_CLR_RT_ExecutionEngine.m_weakReferences)
+        //{
+        //    if(weak->m_identity.m_flags & CLR_RT_HeapBlock_WeakReference::WR_Restored)
+        //    {
+        //        if(weak->m_targetSerialized)
+        //        {
+        //            fExit = true;
 
-                    g_CLR_RT_Persistence_Manager.InvalidateEntry( weak );
-                }
-            }
-        }
-        TINYCLR_FOREACH_NODE_BACKWARD_END();
+        //            g_CLR_RT_Persistence_Manager.InvalidateEntry( weak );
+        //        }
+        //    }
+        //}
+        //TINYCLR_FOREACH_NODE_BACKWARD_END();
 
         if(fExit || m_freeBytes > c_memoryThreshold)
         {
